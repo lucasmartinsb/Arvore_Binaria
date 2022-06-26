@@ -6,22 +6,24 @@ typedef struct ARVORE
 {
     char palavra[20];
     int repeticao;
-    struct ARVORE *left, *right;
+    struct ARVORE *esq, *dir,*pai;
 }Arvore;
 
 typedef struct NODE
 {
     char key;
     struct NODE *prox;
+    Arvore *noAV;
 }Nodo;
 
-Nodo *inicio;
+Nodo *inicio = NULL;
 
 void insereinicio(char key){
     Nodo *novo;
 
     novo=(Nodo*)malloc(sizeof(Nodo));
     novo->key=key;
+    novo->noAV =NULL;
     novo->prox=NULL;
 
     if(inicio==NULL){
@@ -62,11 +64,46 @@ void insereordenado(char key){
          }
 }
 
+int ehmenor(char a, char b)
+{
+    if(a < b)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+
+
+Arvore* buscaNodo(char key,Nodo* aux){
+    if(aux==NULL){
+        insereordenado(key);
+        return buscaNodo(key,inicio);
+    }
+    if(key = aux->key){
+        return aux->noAV;
+    }
+    else{
+        return buscaNodo(key, aux->prox);
+    }
+}
+
+void inserePalavra(char palavra[20])
+{
+    char key = palavra[0];
+    Arvore *aux = buscaNodo(key,inicio);
+
+}
 
 int main(){
 
-    insereordenado('b');
-    insereordenado('a');
+    char palavra[20];
+    printf("Insira uma palavra:");
+    gets(palavra);
+    inserePalavra(palavra);
     
     return 0;
 }
