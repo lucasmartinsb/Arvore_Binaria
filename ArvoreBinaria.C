@@ -101,7 +101,7 @@ void inserePalavra(char palavra[20])
 int main(){
 
     char palavra[20];
-    printf("Insira uma palavra:");
+    printf("Insira uma palavra teste:");
     gets(palavra);
     inserePalavra(palavra);
     
