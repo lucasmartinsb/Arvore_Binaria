@@ -224,11 +224,25 @@ void preFix(nodePalavra *aresta){
     }
 }
 
+void preFixMenor(nodePalavra *aresta){
+    if(aresta!=NULL){
+        int comparacao = aresta->palavra.compare(aresta->esq->palavra);
+        if(comparacao > 0){
+            cout << aresta->esq->palavra;
+            printf("\n");
+            cout << aresta->palavra;
+            printf("\n");
+        }
+        preFixMenor(aresta->esq);
+        preFixMenor(aresta->dir);
+    }
+}
+
 void exibePalavrasTotal(){
     nodeIndice *auxIndice = raiz;
 
     while(auxIndice != NULL){
-        preFix(auxIndice->primeiro);
+        preFixMenor(auxIndice->primeiro);
         auxIndice = auxIndice->prox;
     }
 }
@@ -412,15 +426,13 @@ int main(){
     raiz = NULL;
 
     inserePalavra("abelha");
-    inserePalavra("bolsa");
-    inserePalavra("abacate");
-    inserePalavra("abacate");
-    inserePalavra("abz");
-    inserePalavra("bolsa");
-    inserePalavra("bolsa");
-    inserePalavra("bolsa");
     inserePalavra("crocodiloilho");
     inserePalavra("bala");
+    inserePalavra("caralho");
+    inserePalavra("jesus");
+    inserePalavra("ambulancia");
+    inserePalavra("trator");
+    inserePalavra("aa");
 
     /*printf("\n");
     quantOcorrencias();
@@ -439,13 +451,13 @@ int main(){
     exibePalavrasTotal();
     printf("\n");
 
-    removePalavra("abelha");
+    /*removePalavra("abelha");
 
     exibePalavrasTotal();
     printf("\n");
 
     exibePalavrasIndice('a');
-    printf("\n");
+    printf("\n");*/
 
     return 0;
 }
